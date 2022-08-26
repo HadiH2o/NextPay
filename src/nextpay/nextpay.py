@@ -148,7 +148,7 @@ class NextPay:
         else:
             raise exceptions.UnknownHandled(f"Un-handled error code : {result['code']}")
 
-    def refund(self, trans_id) -> bool:
+    def refund(self, trans_id: str) -> bool:
         url = "https://nextpay.org/nx/gateway/verify"
 
         # creating data for url
