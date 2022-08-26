@@ -1,9 +1,19 @@
-from typing import Literal, Union
+from typing import Literal, Union, Optional, TypedDict, Dict, Any
 
 import requests
 
 import exceptions
 
+
+class PurchageKWargs(TypedDict):
+    currency:  Optional[Literal['IRT', 'IRR']]
+    phone: str
+    custom_json_fields: Dict[Any, Any]  # I'm not sure about keys and values for this item
+    payer_name: str
+    payer_desc: str
+    auto_verify: Literal[True]
+    allowed_card: str
+  
 
 class NextPay:
     # setting headers
@@ -32,7 +42,7 @@ class NextPay:
     def purchase(
             self,
             order_id: str,
-            **kwargs
+            **kwargs: PurchageKWargs
     ):
         """
         Send purchase request to NextPay api.\n
@@ -90,14 +100,14 @@ class NextPay:
     def verify(
             self,
             trans_id: str,
-            currency: Literal['IRT', 'IRR'] = None
+            currency: Optional[Literal['IRT', 'IRR']] = None
     ) -> bool:
         """
             Verifying the user purchase.\n
             Params:
                 trans_id (str): the trans_id your got from purchase function.\n
                 currency ('IRT' | 'IRR'): Currency type.
-            Returns: dict
+            Returns: bool
 
         """
 
