@@ -5,7 +5,7 @@ import requests
 import exceptions
 
 
-class PurchageKWargs(TypedDict):
+class PurchaseKWargs(TypedDict):
     currency:  Optional[Literal['IRT', 'IRR']]
     phone: str
     custom_json_fields: Dict[Any, Any]  # I'm not sure about keys and values for this item
@@ -42,7 +42,7 @@ class NextPay:
     def purchase(
             self,
             order_id: str,
-            **kwargs: PurchageKWargs
+            **kwargs: PurchaseKWargs
     ):
         """
         Send purchase request to NextPay api.\n
